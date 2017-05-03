@@ -31,7 +31,8 @@ defmodule NucleotideCount do
     Enum.reduce(
       'ATCG',
       %{},
-      fn(nucleotide, result) -> Map.put(result, nucleotide, count(strand, nucleotide)) end
+      fn(nucleotide, result)
+        -> Map.put(result, nucleotide, count(strand, nucleotide)) end
     )
   end
 end

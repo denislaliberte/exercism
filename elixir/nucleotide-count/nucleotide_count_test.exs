@@ -1,4 +1,4 @@
-if !System.get_env("EXERCISM_TEST_EXAMPLES") do
+unless System.get_env("EXERCISM_TEST_EXAMPLES") do
   Code.load_file("nucleotide_count.exs", __DIR__)
 end
 

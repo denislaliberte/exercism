@@ -13,9 +13,6 @@ defmodule HelloWorld do
 
   Can you find a way to make all the tests pass with just one
   function?
-
-  Hint: look into argument defaults here:
-  http://elixir-lang.org/getting-started/modules-and-functions.html#default-arguments
   """
 
   @doc """
@@ -23,7 +20,7 @@ defmodule HelloWorld do
   if no name is given.
   """
   @spec hello() :: String.t
-  def hello() do
+  def hello do
     hello("World")
   end
 
