@@ -5,3 +5,4 @@ COPY ./profile.clj /root/.lein/profiles.clj
 COPY . /test
 WORKDIR /test/hello-world
 RUN lein eastwood
+WORKDIR /test
