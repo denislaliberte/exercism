@@ -2,5 +2,5 @@
 
 (defn hello
   ([] "Hello, World!")
-  ([asdf] (str "Hello, " asdf "!"))
+  ([firstname] (str "Hello, " firstname "!"))
 )
