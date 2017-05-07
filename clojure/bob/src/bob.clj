@@ -10,7 +10,7 @@
 
 (defn silence? [x] (empty? (clojure.string/trim x)))
 
-(defn all? [x] (= x x))
+(defn all? [x] true)
 
 (defn response-for [interaction]
   (first
