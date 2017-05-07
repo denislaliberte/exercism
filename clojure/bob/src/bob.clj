@@ -1,19 +1,22 @@
 (ns bob)
 
-(defn shouts? [x] (identical? (clojure.string/upper-case x) x))
+(defn all-upper-case? [x] (identical? (clojure.string/upper-case x) x))
 
-(defn question? [x] (clojure.string/includes? x "?"))
+(defn contain-letters? [x] (re-matches #".*[a-zA-Z]{1}.*" x) )
+
+(defn shouts? [x] (and (all-upper-case? x) (contain-letters? x)))
+
+(defn question? [x] (= (last x) \?))
+
+(defn silence? [x] (empty? (clojure.string/trim x)))
 
 (defn all? [x] (= x x))
-
-(defn response-fora
-  [interaction] (if (shouts? interaction) "Whoa, chill out!" "Whatever.")
-)
 
 (defn response-for [interaction]
   (first
      (first
        (filter (fn [[x y]] (y interaction)) [
+         ["Fine. Be that way!" silence?]
          ["Whoa, chill out!" shouts?]
          ["Sure." question?]
          ["Whatever." all?]]))))
