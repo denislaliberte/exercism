@@ -1,8 +1,8 @@
 (ns bob)
 
-(defn upcase? [qwer] (identical? (clojure.string/upper-case qwer) qwer))
+(defn shouts? [qwer] (identical? (clojure.string/upper-case qwer) qwer))
 
 (defn response-for
-  [question] (if (upcase? question) "Whoa, chill out!" "Whatever.")
+  [question] (if (shouts? question) "Whoa, chill out!" "Whatever.")
 )
 
