@@ -1,8 +1,19 @@
 (ns bob)
 
-(defn shouts? [qwer] (identical? (clojure.string/upper-case qwer) qwer))
+(defn shouts? [x] (identical? (clojure.string/upper-case x) x))
 
-(defn response-for
-  [question] (if (shouts? question) "Whoa, chill out!" "Whatever.")
+(defn question? [x] (clojure.string/includes? x "?"))
+
+(defn all? [x] (= x x))
+
+(defn response-fora
+  [interaction] (if (shouts? interaction) "Whoa, chill out!" "Whatever.")
 )
 
+(defn response-for [interaction]
+  (first
+     (first
+       (filter (fn [[x y]] (y interaction)) [
+         ["Whoa, chill out!" shouts?]
+         ["Sure." question?]
+         ["Whatever." all?]]))))
