@@ -5,20 +5,36 @@ defmodule RotationalCipher do
   Example:
   iex> RotationalCipher.rotate("Attack at dawn", 13)
   "Nggnpx ng qnja"
-
-  notes : 
-  iex(5)> letters = Enum.to_list(?a .. ?z)
-  iex(5)> index = Enum.find_index(letters, fn(x) -> x == ?x end)
-  iex(7)> Enum.at(letters, index + 1)
   """
+
+  @lowercase_letters Enum.to_list(?a .. ?z)
+  @uppercase_letters Enum.to_list(?A .. ?Z)
+
+  def find_index(letter, letters) do
+    Enum.find_index(letters, fn(x) -> x == letter end)
+  end
+
+  def translate_chars(shift, letters) do
+    fn letter ->
+      index = find_index(letter, letters)
+      if is_integer(index) do
+        Enum.at(letters, rem(index + shift, 26))
+      else
+        letter
+      end
+    end
+  end
+
+  def translate(x, letters, shift) do
+    Enum.map(x, translate_chars(shift, letters))
+  end
+
   @spec rotate(text :: String.t(), shift :: integer) :: String.t()
   def rotate(text, shift) do
-    letters = Enum.to_list(?a .. ?z)
-    first_letter = List.first(to_charlist(text))
-    index = Enum.find_index(letters, fn(x) -> x == first_letter end)
-    new_index = index + shift
-    letter = Enum.at(letters, new_index)
-    String.Chars.to_string([letter])
+    text |>
+    to_charlist |>
+    translate(@lowercase_letters, shift) |>
+    translate(@uppercase_letters, shift) |>
+    String.Chars.to_string
   end
 end
-
