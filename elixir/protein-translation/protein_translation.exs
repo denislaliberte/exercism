@@ -4,7 +4,16 @@ defmodule ProteinTranslation do
   """
   @spec of_rna(String.t()) :: { atom,  list(String.t()) }
   def of_rna(rna) do
-    rna
+    cond do
+      String.length(rna) > 3 ->
+        {_, [head]} = of_rna(String.slice(rna, 0..2))
+        {_, tail} = of_rna(String.slice(rna, 2..-1))
+        atail = Enum.filter(tail, fn  v -> v end)
+        { :ok, [head | atail] }
+      String.length(rna) == 3 ->
+        {_, asdf} = of_codon(rna)
+        { :ok, [asdf]}
+    end
   end
 
   @doc """
