@@ -7,11 +7,15 @@ defmodule ProteinTranslation do
     cond do
       String.length(rna) > 3 ->
         {_, head} = of_codon(String.slice(rna, 0..2))
-        {_, tail} = of_rna(String.slice(rna, 2..-1))
-        { :ok, [head | Enum.filter(tail, fn  v -> v end)] }
+       {_, tail} = of_rna(String.slice(rna, 2..-1))
+        tail =
+          tail
+          |> Enum.filter(fn v -> v != "STOP" end)
+          |> Enum.filter(fn v -> v != nil end)
+        { :ok, [head | tail] }
       String.length(rna) == 3 ->
-        {_, asdf} = of_codon(rna)
-        { :ok, [asdf]}
+        {_, protein} = of_codon(rna)
+        { :ok, [protein]}
     end
   end
 
