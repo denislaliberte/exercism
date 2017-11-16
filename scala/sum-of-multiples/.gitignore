@@ -1,0 +1,5 @@
+*.class
+target
+.sbt
+.ivy2
+*.log
