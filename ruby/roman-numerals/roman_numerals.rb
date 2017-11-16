@@ -22,6 +22,8 @@ class Integer
     CSV
       .read('roman_numerals.csv')
       .map { |number, roman| [number.to_i, roman.strip] }
+      .sort_by(&:first)
+      .reverse
   end
 end
 
